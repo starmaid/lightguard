@@ -3,7 +3,8 @@
 # author Nicky (@starmaid#6925)
 # created 05/07/2020
 # edited 05/07/2020
-# version 1.0
+# version 1.1
+# fixed xur location. xurlok is not maintained anymore. understandable tho
 
 import feedparser
 import requests
@@ -30,9 +31,18 @@ if last_update['twab'] != title:
 
 # xur updates
 xur_update = False
-#f = requests.get('https://wherethefuckisxur.com/')
-xur = requests.get('https://xurloc.tk/')
-status = xur.text.split('<h1>')[1].split('</h1>')[0]
+xur = requests.get('https://wherethefuckisxur.com/')
+#xur = requests.get('https://xurloc.tk/') rip to the fallen soldiers
+#status = xur.text.split('<h1>')[1].split('</h1>')[0]
+lines = xur.text.split('\n')
+for l in lines:
+    if "page-title" in l:
+        xloc = l
+        break
+
+z = xloc.split('<')[1].split('>')[1]
+status = z.replace('&#x27;','\'')
+
 if last_update['xur'] != status:
     xur_update = True
     last_update['xur'] = status
