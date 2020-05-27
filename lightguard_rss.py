@@ -42,8 +42,8 @@ for l in lines:
 
 z = xloc.split('<')[1].split('>')[1]
 status = z.replace('&#x27;','\'')
-status = z.replace('&gt;','>')
-status = z.replace('&lt;','<')
+status = status.replace('&gt;','>')
+status = status.replace('&lt;','<')
 
 if last_update['xur'] != status:
     xur_update = True
