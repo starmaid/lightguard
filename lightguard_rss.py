@@ -2,9 +2,9 @@
 # this one chekcs rss feeds and is meant to run like once every 15 min
 # author Nicky (@starmaid#6925)
 # created 05/07/2020
-# edited 05/07/2020
-# version 1.1
-# fixed xur location. xurlok is not maintained anymore. understandable tho
+# edited 05/26/2020
+# version 1.2
+# escaped &gt; and &lt;
 
 import feedparser
 import requests
@@ -42,6 +42,8 @@ for l in lines:
 
 z = xloc.split('<')[1].split('>')[1]
 status = z.replace('&#x27;','\'')
+status = z.replace('&gt;','>')
+status = z.replace('&lt;','<')
 
 if last_update['xur'] != status:
     xur_update = True
