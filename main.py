@@ -161,12 +161,15 @@ class Bot(commands.Bot):
                 if len(ctx.bot.events) == 0:
                     reply = '`no events planned`'
                 else:
+                    fail = 1
                     for ev in ctx.bot.events:
                         if ev.name == msg[2]:
                             ctx.bot.events.remove(ev)
                             reply = '`deleted sucessfully`'
+                            fail = 0
                             break
-                    reply = '`unable to delete`'
+                    if fail == 1:
+                        reply = '`unable to delete`'
         elif cmd == 'list':
             if len(ctx.bot.events) == 0:
                 reply = '`no events planned`'
